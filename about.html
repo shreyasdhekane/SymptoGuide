@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>About Us</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 </head>
 
 <body>
+
     <!-- Navigation Bar -->
     <header class="text-grey-900 body-font bg-teal-600">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -31,32 +32,73 @@
             </nav>
         </div>
     </header>
+    <!-- About section -->
+    <div class="bg-white py-6 sm:py-8 lg:py-12"
+        style="background-image: url(https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=996&t=st=1694169988~exp=1694170588~hmac=673202af73c585818b1dfa2ca349fc41f3f2ed48d835f398f3e1785997d99da0); background-repeat: no-repeat; background-size: cover;">
+        <div class="mx-auto max-w-screen-md px-4 md:px-8">
+            <h2 class="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">About Us: CtrlAltDefeat @ LIVE THE
+                CODE 2.0</h2>
+            <br>
+            <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">CtrlAltDefeat is a diverse and dynamic team of aspiring
+                hackers, programmers, and creators from different walks of life, brought together by our shared love for
+                technology and coding. We thrive on challenges and believe in the power of collaboration to achieve
+                great things.</p>
 
-    <!-- hero section -->
-    <section class="text-gray-600 body-font "
-        style="background-image: url(https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=996&t=st=1694169988~exp=1694170588~hmac=673202af73c585818b1dfa2ca349fc41f3f2ed48d835f398f3e1785997d99da0);background-repeat: no-repeat; background-size: cover;">
-        <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-            <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero"
-                src="https://dummyimage.com/720x600">
-            <div class="text-center lg:w-2/3 w-full">
-                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Lorem ipsum dolor sit amet.
-                </h1>
-                <p class="mb-8 leading-relaxed">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut, sunt autem
-                    quod quasi animi debitis ex sequi, labore minus eum architecto? Sunt possimus assumenda dignissimos
-                    neque velit aliquam quidem provident sit ducimus, sequi voluptatibus.</p>
-                <div class="flex justify-center">
-                    <button
-                        class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg"><a
-                            href="symptoms.html">Check Symptoms</a></button>
-                    <button
-                        class="ml-4 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg"
-                        href="telehealth.html">Telehealth</button>
+            <p class="text-gray-500 sm:text-lg">The name "CtrlAltDefeat" embodies our philosophy. Just as
+                Ctrl+Alt+Delete on a keyboard can reboot a system, we believe in the power of creativity and
+                problem-solving to reboot the status quo. We see challenges not as defeats but as opportunities to Ctrl
+                (take control), Alt (seek alternatives), and ultimately, Defeat (overcome) obstacles.</p>
+            <br><br>
+            <blockquote class="mb-6 border-l-4 pl-4 italic text-gray-500 sm:text-lg md:mb-8 md:pl-6">“⚠️ Disclaimer!!!
+                This tool does not provide medical advice.
+                This tool is not intended to be a substitute for professional medical advice, diagnosis, or
+                treatment.Always seek the advice of your physician or other qualified health provider with any questions
+                you may have regarding a medical condition. Never disregard professional medical advice or delay in
+                seeking it”</blockquote>
+            <br><br>
+            <div class="relative mb-6 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:mb-8">
+                <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600&h=350"
+                    loading="lazy" alt="Photo by Minh Pham" class="h-full w-full object-cover object-center" />
+            </div>
+        </div>
+    </div>
+    <!-- contact us -->
+    <section class="text-gray-600 body-font relative bg-teal-300">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
+            </div>
+            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                <div class="flex flex-wrap -m-2">
+                    <div class="p-2 w-1/2">
+                        <div class="relative">
+                            <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-1/2">
+                        <div class="relative">
+                            <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
+                            <textarea id="message" name="message"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                        </div>
+                    </div>
+                    <div class="p-2 w-full">
+                        <button
+                            class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-
 
 
     <!-- footer -->
