@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SymptoGuide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/images/logosymp.png" type="image/png">
+</head>
+
+<body 
+    style="background-image: url(https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=996&t=st=1694169988~exp=1694170588~hmac=673202af73c585818b1dfa2ca349fc41f3f2ed48d835f398f3e1785997d99da0); background-repeat: no-repeat; background-size: cover;">
+    <header class="text-grey-900 body-font font-weight:700 bg-teal-600">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <div class="logogo" style="width: 10%;">
+                    <img src="/images/logosymp.png">
+                </div>
+                <span class="ml-3 text-xl">SymptoGuide</span>
+            </a>
+            <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                <a class="mr-5  hover:underline  hover:text-white " href="index.html">HOME</a>
+                <a class="mr-5 hover:underline hover:text-white hover:text-white" href="symptoms_checker.html">SYMPTOM
+                    CHECKER</a>
+                <a class="mr-5 hover:underline hover:text-white hover:text-white" href="commentSec.html">DISCUSS</a>
+                <a class="mr-5 hover:underline hover:text-white hover:text-white" href="about.html">ABOUT US</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="bground"
+        style="background-image: url(https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=996&t=st=1694169988~exp=1694170588~hmac=673202af73c585818b1dfa2ca349fc41f3f2ed48d835f398f3e1785997d99da0); background-repeat: no-repeat; background-size: cover;">
+        <blockquote class="p-10 border-l-4 pl-4 italic text-gray-500 sm:text-lg md:mb-8 md:pl-6 text-center">“⚠️
+            Disclaimer!!! This tool does not provide medical advice.
+            This tool is not intended to be a substitute for professional medical advice, diagnosis, or treatment.Always
+            seek the advice of your physician or other qualified health provider with any questions you may have
+            regarding a
+            medical condition. Never disregard professional medical advice or delay in seeking it”</blockquote>
+
+        <form id="symptomForm" class="bg-white p-4 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label for="symptoms" class="block text-gray-700 font-bold mb-2">Enter your symptoms
+                    (comma-separated):</label>
+                <input type="text" id="symptoms" name="symptoms"
+                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                onclick="handleFormSubmit(event)">Check Symptoms</button>
+        </form>
+
+        <!-- Displaying results -->
+        <div class=" display-flex justify-center bg-white p-6 rounded-lg shadow-md mt-8 border border-red-400" style="border-style: dashed; border-width: 4px;">
+            <h2 class="text-2xl font-bold mb-4">Possible conditions based on your symptoms:</h2>
+            <ul id="resultList" class="list-disc pl-6 mb-4"></ul>
+        
+            <h2 class="text-2xl font-bold mb-4">The most likely condition based on your symptoms:</h2>
+            <p id="mostLikelyCondition" class="text-xl"></p>
+        </div>        
+
+    </div>
+
+    <script>
+        class SymptomChecker {
+            constructor() {
+                this.symptomDatabase = {
+                    "cough": ["Common Cold", "Flu", "COVID-19"],
+                    "fever": ["Flu", "COVID-19"],
+                    "headache": ["Migraine", "Tension Headache", "COVID-19"],
+                    "fatigue": ["Anemia", "Chronic Fatigue Syndrome", "COVID-19"],
+                    "Sore Throat": ["Strep Throat", "Common Cold", "COVID-19"],
+                    "Shortness of Breath": ["Asthma", "Pneumonia", "COVID-19"],
+                    "Nausea": ["Food Poisoning", "Gastroenteritis", "Morning Sickness"],
+                    "Vomiting": ["Food Poisoning", "Gastroenteritis", "Norovirus"],
+                    "Diarrhea": ["Food Poisoning", "Gastroenteritis", "Irritable Bowel Syndrome"],
+                    "Chest Pain": ["Heart Attack", "Angina", "Gastroesophageal Reflux Disease"],
+                    "Abdominal Pain": ["Appendicitis", "Irritable Bowel Syndrome", "Gastritis"],
+                    "Joint Pain": ["Rheumatoid Arthritis", "Osteoarthritis", "Lupus"],
+                    "Back Pain": ["Herniated Disc", "Muscle Strain", "Osteoarthritis"],
+                    "Frequent Urination": ["Urinary Tract Infection", "Diabetes", "Enlarged Prostate"],
+                    "Constipation": ["Irritable Bowel Syndrome", "Hemorrhoids", "Colon Cancer"],
+                    "Dizziness": ["Vertigo", "Anemia", "Migraine"],
+                    "Rash": ["Allergies", "Eczema", "Psoriasis"],
+                    "Swelling": ["Edema", "Allergies", "Lymphedema"],
+                    "Chest Congestion": ["Pneumonia", "Bronchitis", "Asthma"],
+                    "Runny Nose": ["Common Cold", "Allergies", "Sinusitis"],
+                    "Frequent Urination": ["Urinary Tract Infection", "Diabetes", "Enlarged Prostate"],
+                    "Frequent Thirst": ["Diabetes", "Dehydration", "Kidney Disease"],
+                    "Unexplained Weight Loss": ["Hyperthyroidism", "Cancer", "Diabetes"],
+                    "Fainting": ["Vasovagal Syncope", "Low Blood Pressure", "Heart Arrhythmia"],
+                    "Seizures": ["Epilepsy", "Fever-induced Seizures", "Brain Tumor"],
+                    "Chest Tightness": ["Angina", "Asthma", "Panic Attack"],
+                    "Numbness or Tingling": ["Peripheral Neuropathy", "Multiple Sclerosis", "Pinched Nerve"],
+                    "Vision Changes": ["Cataracts", "Glaucoma", "Macular Degeneration"],
+                    "Shortness of Breath": ["Asthma", "Pneumonia", "COPD"],
+                    "Coughing Blood": ["Lung Cancer", "Tuberculosis", "Bronchitis"],
+                    "Bloody Stool": ["Hemorrhoids", "Colon Cancer", "Inflammatory Bowel Disease"],
+                    "Loss of Appetite": ["Depression", "Anorexia", "Cancer"],
+                    "Night Sweats": ["Tuberculosis", "Lymphoma", "Menopause"],
+                    "Chest Pain with Exertion": ["Angina", "Aortic Stenosis", "Coronary Artery Disease"],
+                    "Abdominal Bloating": ["Irritable Bowel Syndrome", "Ovarian Cancer", "Gastritis"],
+                    "Difficulty Swallowing": ["Esophageal Stricture", "GERD", "Throat Cancer"],
+                    "Pale Skin": ["Anemia", "Iron Deficiency", "Leukemia"],
+                    "Calf Pain": ["Deep Vein Thrombosis", "Muscle Cramp", "Peripheral Artery Disease"],
+                    "Increased Heart Rate": ["Anxiety", "Hyperthyroidism", "Panic Attack"],
+                    "Chest Wall Pain": ["Costochondritis", "Muscle Strain", "Rib Fracture"],
+                    "Mood Swings": ["Bipolar Disorder", "Depression", "Borderline Personality Disorder"],
+                    "Difficulty Breathing While Lying Down": ["Congestive Heart Failure", "Sleep Apnea", "Chronic Obstructive Pulmonary Disease"],
+                    "Yellowing of Skin and Eyes": ["Jaundice", "Hepatitis", "Liver Disease"],
+                    "Hair Loss": ["Alopecia", "Thyroid Disorder", "Chemotherapy"],
+                    "Irregular Menstrual Periods": ["Polycystic Ovary Syndrome", "Endometriosis", "Uterine Fibroids"],
+                    "Cold Hands and Feet": ["Raynaud's Disease", "Poor Circulation", "Hypothyroidism"], // Updated symptom
+                    // Add more symptoms and associated conditions here 
+                };
+            }
+
+            checkSymptoms(symptoms) {
+                const matchedConditions = new Set();
+                for (const symptom of symptoms) {
+                    if (symptom in this.symptomDatabase) {
+                        this.symptomDatabase[symptom].forEach(condition => {
+                            matchedConditions.add(condition);
+                        });
+                    }
+                }
+
+                if (matchedConditions.size > 0) {
+                    return Array.from(matchedConditions);
+                } else {
+                    return ["No matching conditions found."];
+                }
+            }
+        }
+
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const userInput = document.getElementById("symptoms").value;
+            const userSymptoms = userInput.split(",").map(symptom => symptom.trim());
+
+            const symptomChecker = new SymptomChecker();
+            const result = symptomChecker.checkSymptoms(userSymptoms);
+
+            // Display results
+            const resultList = document.getElementById("resultList");
+            const mostLikelyCondition = document.getElementById("mostLikelyCondition");
+
+            resultList.innerHTML = ""; // Clear previous results
+
+            if (result.length > 0) {
+                mostLikelyCondition.textContent = result[0];
+                result.shift(); // Remove the most likely condition from the list
+                result.forEach(condition => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = condition;
+                    resultList.appendChild(listItem);
+                });
+            } else {
+                mostLikelyCondition.textContent = "No matching conditions found.";
+            }
+        }
+    </script>
+</body>
+
+</html>
